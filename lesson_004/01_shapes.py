@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from itertools import count
 
 import simple_draw as sd
 
@@ -27,7 +28,28 @@ import simple_draw as sd
 # sd.line()
 # Результат решения см lesson_004/results/exercise_01_shapes.jpg
 
-# TODO здесь ваш код
+def figure (point, length=100, count_corner=3):
+    angle = 0
+    corner = int(360 / count_corner)
+    for _ in range(0, (count_corner - 1)):
+        if angle == 0:
+            v = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+            v.draw()
+            angle += corner
+        else:
+            v = sd.get_vector(v.end_point, angle=angle, length=length, width=3)
+            v.draw()
+            angle += corner
+    sd.line(point, v.end_point, width=3)
+
+def print_figure():
+    i = 3
+    for x in range(100, 401, 300):
+        for y in range(100, 401, 300):
+            figure(sd.get_point(x, y), 100, i)
+            i += 1
+
+print_figure()
 
 # Часть 1-бис.
 # Попробуйте прикинуть обьем работы, если нужно будет внести изменения в этот код.
@@ -51,6 +73,24 @@ import simple_draw as sd
 # А теперь - сколько надо работы что бы внести изменения в код? Выгода на лицо :)
 # Поэтому среди программистов есть принцип D.R.Y. https://clck.ru/GEsA9
 # Будьте ленивыми, не используйте копи-пасту!
+
+# def triangle(point, angle=0, length=100, delta=60):
+#     if angle >= 360:
+#         return
+#     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+#     v1.draw()
+#     next_point = v1.end_point
+#     angle = angle + delta
+#     triangle(next_point, angle, length, delta)
+#
+# def shape():
+#     i = 3
+#     for x in range(100, 401, 300):
+#         for y in range(100, 401, 300):
+#             angle = 360 / i
+#             triangle(sd.get_point(x, y), 0, 100, angle)
+#             i += 1
+
 
 
 sd.pause()
