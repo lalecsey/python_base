@@ -2,7 +2,6 @@
 
 import simple_draw as sd
 
-
 # На основе кода из практической части реализовать снегопад:
 # - создать списки данных для отрисовки N снежинок
 # - нарисовать падение этих N снежинок
@@ -16,10 +15,25 @@ N = 20
 # sd.sleep()
 # sd.random_number()
 # sd.user_want_exit()
+from random import randint
 
-# TODO здесь ваш код
+x = [randint(100, 500) for i in range(20)]
+y = [randint(450, 600) for i in range(20)]
+length_list = [randint(5, 50) for i in range(20)]
+
 while True:
     sd.clear_screen()
+    for i in range(20):
+        point = sd.get_point(x[i], y[i])
+        sd.snowflake(center=point, length=length_list[i])
+        y[i] += (randint(5, 15) * -1)
+        if y[i] < 0:
+            break
+        x[i] += randint(-15, 15)
+    sd.sleep(0.1)
+    if sd.user_want_exit():
+        break
+
     pass
     pass
     pass
