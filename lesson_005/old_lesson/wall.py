@@ -1,26 +1,29 @@
-# -*- coding: utf-8 -*-
+import simple_draw as sd
 
-# (цикл for)
-import simple_draw
+def wall():
+    for y in range(0, 300, 30):
+        y_2 = y + 30
+        for x in range(300, 600, 60):
+            if y / 30 % 2 == 1:
+                x -= 30
+            x_2 = x + 60
+            point = sd.get_point(x, y)
+            point_2 = sd.get_point(x_2, y_2)
+            sd.rectangle(point, point_2, color=sd.COLOR_YELLOW, width=1)
 
-# Нарисовать стену из кирпичей. Размер кирпича - 100х50
-# Использовать вложенные циклы for
+# wall()
 
-# TODO здесь ваш код
-
-
-for y in range(0, 600, 50):
-    y_2 = y + 50
-    for x in range(0, 600, 100):
-        if y / 50 % 2 == 1:
-            x -= 50
-        x_2 = x +100
-        point = simple_draw.get_point(x, y)
-        point_2 = simple_draw.get_point(x_2, y_2)
-        simple_draw.rectangle(point, point_2, color=simple_draw.COLOR_YELLOW, width=1)
+def wall_2(x=0, y=0, x_2=300, y_2=300, length=60):
+    width = length / 2
+    start_point = sd.get_point(x, y)
+    sd.square(start_point, side=width, width=1)
+    point = sd.get_point(x + width, y)
+    point_2 = sd.get_point(x + width + length, y + width)
+    sd.rectangle(point, point_2, width=1)
 
 
 
 
 
-simple_draw.pause()
+wall_2(0,0, 500, 500, 100)
+sd.pause()
