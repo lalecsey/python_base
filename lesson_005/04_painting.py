@@ -17,7 +17,20 @@ tree(point=tree_point, angle=90, length=70, delta=30)
 tree_point = sd.get_point(1150, 400)
 tree(point=tree_point, angle=90, length=55, delta=30)
 
+point_rectangle = sd.get_point(370, 0)
+point_rectangle_2 = sd.get_point(820, 420)
+sd.rectangle(point_rectangle, point_rectangle_2, color=sd.COLOR_YELLOW, width=1)
 wall()
+
+point_triangle = sd.get_point(350, 420)
+v1 = sd.get_vector(start_point=point_triangle, angle=0, length=490, width=3)
+v1.draw()
+point_triangle_2 = v1.end_point
+v2 = sd.get_vector(start_point=point_triangle_2, angle=150, length=270, width=3)
+v2.draw()
+point_triangle_3 = v2.end_point
+sd.line(point_triangle_3, point_triangle, width=3)
+
 snowdrift()
 
 sd.pause()
