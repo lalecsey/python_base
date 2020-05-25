@@ -43,8 +43,19 @@
 # Это пример применения SOLID принципа (см https://goo.gl/GFMoaI) в архитектуре программ.
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
-from mastermind_engine import check_mumber, make_number
+from mastermind_engine import check_mumber, make_number, gameover
+from termcolor import cprint, colored
 
+number = 0
 
-make_number()
-check_mumber()
+def game():
+    cprint('Загадоно четырехзначное число', color='green')
+    cprint('Попробуй угадать', color='green')
+    make_number()
+    while True:
+        input_number = input(colored('Введите число', color='green'))
+        check_mumber(input_number)
+        if gameover():
+            break
+
+game()
