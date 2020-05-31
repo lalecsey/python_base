@@ -7,17 +7,33 @@ import simple_draw as sd
 #  - отработку изменений координат
 #  - отрисовку
 
-
 class Snowflake:
-    pass
 
-    # TODO здесь ваш код
+    def __init__(self, x, y, length):
+        self.length = length
+        self.x = x
+        self.y = y
+        self.draw()
 
+    def clear(self):
+        sd.clear_screen()
 
-flake = Snowflake()
+    def move(self):
+        self.x += 10
+        self.y -= 10
+
+    def draw(self):
+        point = sd.get_point(self.x, self.y)
+        sd.snowflake(point, self.length)
+
+    def can_fall(self):
+        var = 50 < self.y
+        return var
+
+flake = Snowflake(x=50, y=550, length=50)
 
 while True:
-    flake.clear_previous_picture()
+    flake.clear()
     flake.move()
     flake.draw()
     if not flake.can_fall():
