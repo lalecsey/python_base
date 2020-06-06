@@ -45,10 +45,8 @@ class Snowflake:
 
 # шаг 2: создать снегопад - список объектов Снежинка в отдельном списке, обработку примерно так:
 def get_flakes(count):
-    i = 0
     fl = []
-    while i < count:
-        i += 1
+    for _ in range(20):
         flake = Snowflake(x=random.randint(0, 200), y=random.randint(400, 600), length=random.randint(10, 50))
         fl.append(flake)
         return fl
