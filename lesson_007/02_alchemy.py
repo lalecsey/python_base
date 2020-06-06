@@ -44,7 +44,7 @@ class Air:
     def __str__(self):
         return 'воздух'
 
-    def __add__(self):
+    def __add__(self, other):
         if other.__name__ == 'water':
             return Storm()
         elif other.__name__ == 'fire':
@@ -62,7 +62,7 @@ class Fire:
     def __str__(self):
         return 'огонь'
 
-    def __add__(self):
+    def __add__(self, other):
         if other.__name__ == 'water':
             return Steam()
         elif other.__name__ == 'air':
@@ -80,7 +80,7 @@ class Earth:
     def __str__(self):
         return 'земля'
 
-    def __add__(self):
+    def __add__(self, other):
         if other.__name__ == 'water':
             return Dirt()
         elif other.__name__ == 'air':
@@ -141,5 +141,6 @@ class Lava:
 
 
 print(Water(), '+', Air(), '=', Water() + Air())
-
 print(Water(), '+', Fire(), '=', Water() + Fire())
+print(Air(), '+', Fire(), '=', Air() + Fire())
+print(Air(), '+', Lava(), '=', Air() + Lava())
