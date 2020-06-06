@@ -21,99 +21,125 @@
 
 class Water:
 
+    def __init__(self):
+        self.__name__ = 'water'
+
+    def __str__(self):
+        return 'вода'
+
     def __add__(self, other):
-        if other.__name__ == Air:
-            storm = Storm()
-            return storm
-        elif other.__name__ == Fire:
-            steam = Steam()
-            return steam
-        elif other.__name__ == Earth:
-            dirt = Dirt()
-            return dirt
+        if other.__name__ == 'air':
+            return Storm()
+        elif other.__name__ == 'fire':
+            return Steam()
+        elif other.__name__ == 'earth':
+            return Dirt()
         else:
             return None
-    def __str__(self):
-        return print(Water(), '+', Air(), '=', Water() + Air())
-
 
 class Air:
+    def __init__(self):
+        self.__name__ = 'air'
+
+    def __str__(self):
+        return 'воздух'
 
     def __add__(self):
-        if other.__name__ == Water:
-            storm = Storm()
-            return storm
-        elif other.__name__ == Fire:
-            steam = Steam()
-            return steam
-        elif other.__name__ == Earth:
-            dirt = Dirt()
-            return dirt
+        if other.__name__ == 'water':
+            return Storm()
+        elif other.__name__ == 'fire':
+            return Lightning()
+        elif other.__name__ == 'earth':
+            return Dust()
         else:
             return None
 
-    def __str__(self):
-        return print(Water(), '+', Air(), '=', Water() + Air())
+class Fire:
 
-# class Fire:
-#
-#     def __add__(self):
-#
-#     def __str__(self):
-#         print()
-#
-# class Earth:
-#
-#     def __add__(self):
-#
-#     def __str__(self):
-#         print()
-#
-class Storm:
+    def __init__(self):
+        self.__name__ = 'fire'
+
+    def __str__(self):
+        return 'огонь'
 
     def __add__(self):
+        if other.__name__ == 'water':
+            return Steam()
+        elif other.__name__ == 'air':
+            return Lightning()
+        elif other.__name__ == 'earth':
+            return Lava()
+        else:
+            return None
+
+class Earth:
+
+    def __init__(self):
+        self.__name__ = 'earth'
 
     def __str__(self):
-        print()
+        return 'земля'
 
-# class Steam:
-#
-#     def __add__(self):
-#
-#     def __str__(self):
-#         print()
-#
-# class Dirt:
-#
-#     def __add__(self):
-#
-#     def __str__(self):
-#         print()
+    def __add__(self):
+        if other.__name__ == 'water':
+            return Dirt()
+        elif other.__name__ == 'air':
+            return Dust()
+        elif other.__name__ == 'fire':
+            return Lava()
+        else:
+            return None
 
-# class Lightning:
-#
-#     def __add__(self):
-#
-#     def __str__(self):
-#         print()
-#
-# class Dust:
-#
-#     def __add__(self):
-#
-#     def __str__(self):
-#         print()
-#
-# class Lava:
-#
-#     def __add__(self):
-#
-#     def __str__(self):
-#         print()
+class Storm:
 
-water = Water()
-air = Air()
+    def __init__(self):
+        self.__name__ = 'storm'
 
-# Усложненное задание (делать по желанию)
-# Добавить еще элемент в игру.
-# Придумать что будет при сложении существующих элементов с новым.
+    def __str__(self):
+        return 'шторм'
+
+class Steam:
+
+    def __init__(self):
+        self.__name__ = 'steam'
+
+    def __str__(self):
+        return 'пар'
+
+class Dirt:
+
+    def __init__(self):
+        self.__name__ = 'dirt'
+
+    def __str__(self):
+        return 'грязь'
+
+class Lightning:
+
+    def __init__(self):
+        self.__name__ = 'lightning'
+
+    def __str__(self):
+        return 'молния'
+
+class Dust:
+
+    def __init__(self):
+        self.__name__ = 'dust'
+
+    def __str__(self):
+        return 'пыль'
+
+class Lava:
+
+    def __init__(self):
+        self.__name__ = 'lava'
+
+    def __str__(self):
+        return 'лава'
+
+
+
+print(Water(), '+', Air(), '=', Water() + Air())
+
+print(Water(), '+', Fire(), '=', Water() + Fire())
