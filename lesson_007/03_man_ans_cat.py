@@ -72,9 +72,10 @@ class Man:
         self.fullness -= 10
         cprint('{} Вьехал в дом'.format(self.name), color='cyan')
 
-    def pick_up_cat(self, name_cat):
+    def pick_up_cat(self, cat):
         house = self.house
-        cprint('{} подобрал кота {}'.format(self.name, self.name_cat), color='cyan')
+        cat.house = house
+        cprint('{} подобрал кота по имени {}'.format(self.name, cat.name_cat), color='cyan')
 
 
     def clean_the_house(self):
@@ -129,10 +130,6 @@ class Cat:
         return 'Я - {}, сытость {}'.format(
             self.name_cat, self.fullness_cat)
 
-    def go_to_the_house(self, house):
-        self.house = house
-        cprint('{} Вьехал в дом'.format(self.name_cat), color='cyan')
-
     def sleep(self):
         cprint('{} спит'.format(self.name_cat), color='green')
         self.fullness_cat -= 10
@@ -179,11 +176,10 @@ my_sweet_home = House()
 for citisen in citizens:
     citisen.go_to_the_house(house=my_sweet_home)
 
-for cat in cats:
-    cat.go_to_the_house(house=my_sweet_home)
+for i in range(len(cats)):
+    citizens[0].pick_up_cat(cats[i])
 
-# for i in range(len(cats))
-#     citizens[0].pick_up_cat(cats[i])
+# citizens[0].pick_up_cat(cats[0])
 
 for day in range(1, 366):
     print('================ день {} =================='.format(day))
@@ -199,10 +195,3 @@ for day in range(1, 366):
     print(my_sweet_home)
 
 
-# Кот может есть, спать и драть обои - необходимо реализовать соответствующие методы.
-# Когда кот спит - сытость уменьшается на 10
-# Когда кот ест - сытость увеличивается на 20, кошачья еда в доме уменьшается на 10.
-# Когда кот дерет обои - сытость уменьшается на 10, степень грязи в доме увеличивается на 5
-# Если степень сытости < 0, кот умирает.
-# Так же надо реализовать метод "действуй" для кота, в котором он принимает решение
-# что будет делать сегодня
