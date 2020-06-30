@@ -45,57 +45,148 @@ from random import randint
 class House:
 
     def __init__(self):
-        pass
-
-
-class Husband:
-
-    def __init__(self):
-        pass
+        self.money = 100
+        self.food = 50
+        self.dirt = 0
 
     def __str__(self):
-        return super().__str__()
+        return 'В доме осталось еды {}, осталось денег {}, грязи в доме {}'.format(
+            self.food, self.money,self.dirt)
 
-    def act(self):
-        pass
+class Man:
+
+    def __init__(self, name):
+        self.name = name
+        self.fullness = 50
+        self.happy = 100
+
+    def __str__(self):
+        return 'Я - {}, сытость {}'.format(self.name, self.fullness)
+
+class Husband(Man):
+
+    def __init__(self, name, house):
+        super().__init__(name=name)
+        self.house = house
+
+    def __str__(self):
+        res = super().__str__()
+        return res + ', счастья {}'.format(self.happy)
 
     def eat(self):
-        pass
+        if self.house.food >= 30:
+            self.fullness += 30
+            self.house.food -= 30
+            cprint('{} поел'.format(self.name), color='green')
+        else:
+            cprint('{} нет еды'.format(self.name), color='red')
+
+    def act(self):
+        if self.fullness <= 0:
+            cprint('{} умер от голода ...'.format(self.name), color='red')
+        elif self.happy < 10:
+            cprint('{} умер от дипресии ...'.format(self.name), color='red')
+            return
+        if self.house.dirt >= 90:
+            self.happy -= 5
+        self.house.dirt += 5
+        dice = randint(1, 5)
+        if self.fullness <= 20:
+            self.eat()
+        elif self.house.money <= 90:
+            self.work()
+        elif dice == 1:
+            self.work()
+        elif dice == 2:
+            self.eat()
+        else:
+            self.gaming()
 
     def work(self):
-        pass
+        cprint('{} сходил на работу.'.format(self.name), color='blue')
+        self.house.money += 150
+        self.fullness -= 10
 
     def gaming(self):
-        pass
+        cprint('{} играет в WoT.'.format(self.name), color='yellow')
+        self.fullness -= 10
+        self.happy += 20
 
+class Wife(Man):
+    fur_coat = 0
 
-class Wife:
-
-    def __init__(self):
-        pass
+    def __init__(self, name, house):
+        super().__init__(name=name)
+        self.house = house
 
     def __str__(self):
-        return super().__str__()
-
-    def act(self):
-        pass
+        res = super().__str__()
+        return res + ', счастья {}'.format(self.happy)
 
     def eat(self):
-        pass
+        if self.house.food >= 30:
+            self.fullness += 30
+            self.house.food -= 30
+            cprint('{} поела'.format(self.name), color='green')
+        else:
+            cprint('{} нет еды'.format(self.name), color='red')
+
+    def act(self):
+        if self.fullness <= 0:
+            cprint('{} умер от голода ...'.format(self.name), color='red')
+        elif self.happy < 10:
+            cprint('{} умер от дипресии ...'.format(self.name), color='red')
+            return
+        if self.house.dirt >= 90:
+            self.happy -= 5
+        dice = randint(1, 5)
+        if self.fullness <= 20:
+            self.eat()
+        elif self.house.food <= 60:
+            self.shopping()
+        elif dice == 1:
+            self.eat()
+        elif dice == 2:
+            self.shopping()
+        elif dice == 3:
+            self.buy_fur_coat()
+        else:
+            self.clean_house()
 
     def shopping(self):
-        pass
+        self.fullness -= 10
+        if self.house.money >= 90:
+            cprint('{} сходиила в магазин за едой'.format(self.name), color='blue')
+            self.house.money -= 90
+            self.house.food += 90
+        else:
+            cprint('{} деньги кончились!'.format(self.name), color='red')
+
+
 
     def buy_fur_coat(self):
-        pass
+        self.fullness -= 10
+        if self.house.money >= 350:
+            cprint('{} купила шубу.'.format(self.name), color='yellow')
+            self.happy += 60
+            Wife.fur_coat += 1
+        else:
+            cprint('{} на шубу нет денег'.format(self.name), color='red')
+
 
     def clean_house(self):
-        pass
-
+        cprint('{} убралась в доме'.format(self.name), color='magenta')
+        self.house.dirt = 0
+        self.fullness -= 10
 
 home = House()
-serge = Husband(name='Сережа')
-masha = Wife(name='Маша')
+serge = Husband(name='Сережа', house=home)
+masha = Wife(name='Маша', house=home)
+
+print(serge)
+print(masha)
+print(home)
+
 
 for day in range(365):
     cprint('================== День {} =================='.format(day), color='red')
@@ -105,7 +196,9 @@ for day in range(365):
     cprint(masha, color='cyan')
     cprint(home, color='cyan')
 
-# TODO после реализации первой части - отдать на проверку учителю
+cprint('Всего шуб куплено {}'.format(Wife.fur_coat), color='yellow')
+
+# # TODO после реализации первой части - отдать на проверку учителю
 
 ######################################################## Часть вторая
 #
@@ -189,22 +282,22 @@ class Child:
 # отправить на проверку учителем.
 
 
-home = House()
-serge = Husband(name='Сережа')
-masha = Wife(name='Маша')
-kolya = Child(name='Коля')
-murzik = Cat(name='Мурзик')
-
-for day in range(365):
-    cprint('================== День {} =================='.format(day), color='red')
-    serge.act()
-    masha.act()
-    kolya.act()
-    murzik.act()
-    cprint(serge, color='cyan')
-    cprint(masha, color='cyan')
-    cprint(kolya, color='cyan')
-    cprint(murzik, color='cyan')
+# home = House()
+# serge = Husband(name='Сережа')
+# masha = Wife(name='Маша')
+# kolya = Child(name='Коля')
+# murzik = Cat(name='Мурзик')
+#
+# for day in range(365):
+#     cprint('================== День {} =================='.format(day), color='red')
+#     serge.act()
+#     masha.act()
+#     kolya.act()
+#     murzik.act()
+#     cprint(serge, color='cyan')
+#     cprint(masha, color='cyan')
+#     cprint(kolya, color='cyan')
+#     cprint(murzik, color='cyan')
 
 
 # Усложненное задание (делать по желанию)

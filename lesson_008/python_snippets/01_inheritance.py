@@ -154,6 +154,7 @@ class Missile(CanFly):
 
     def land_on(self):
         self.altitude = 0
+        self.velocity = 0
         self.destroy_enemy_base()
 
     def destroy_enemy_base(self):
