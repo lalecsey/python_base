@@ -142,7 +142,7 @@ class Cat:
         else:
             cprint('{} нет еды'.format(self.name_cat), color='red')
 
-    def tear_the_Wallpaper(self):
+    def soil(self):
         cprint('{} рвёт обои'.format(self.name_cat), color='green')
         self.fullness_cat -= 10
         self.house.dirt += 5
@@ -159,7 +159,7 @@ class Cat:
         elif dice == 2:
             self.eat()
         else:
-            self.tear_the_Wallpaper()
+            self.soil()
 
 
 
