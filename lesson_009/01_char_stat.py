@@ -20,7 +20,7 @@
 #
 # Упорядочивание по частоте - по убыванию. Ширину таблицы подберите по своему вкусу
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
-import os
+
 import zipfile
 
 class Stat():
@@ -54,16 +54,18 @@ class Stat():
         sort_keys = list(self.stat.keys())
         sort_keys.sort()
         a = ['A', 'a', 'А', 'а']
+        print('+', '-' * 7, '+', '-' * 9, '+')
+        print('|  буква  |  частота  |')
         for i in sort_keys:
             if i in a:
-                print('+', '-' * 5, '+', '-' * 10, '+')
-                print('+ {0:^5} + {1:10d} +'.format(i, self.stat[i]))
+                print('+', '-' * 7, '+', '-' * 9, '+')
+                print('| {0:^7} | {1:9d} |'.format(i, self.stat[i]))
             else:
-                print('+ {0:^5} + {1:10d} +'.format(i, self.stat[i]))
+                print('| {0:^7} | {1:9d} |'.format(i, self.stat[i]))
 
-        print('+', '-' * 5, '+', '-' * 10, '+')
+        print('+', '-' * 7, '+', '-' * 9, '+')
 
-# print(os.path.abspath())
+
 stat_mir = Stat(file_name='voyna-i-mir.txt.zip')
 stat_mir.collect()
 stat_mir.stat_print()
