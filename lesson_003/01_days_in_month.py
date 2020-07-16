@@ -12,7 +12,7 @@ month = int(user_input)
 print('Вы ввели', month)
 
 year = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-if 1 > month > 12:
-    print('Ошибка номера.')
-else:
+if 1 < month < 12:
     print(year[month - 1])
+else:
+    print('Ошибка номера.')
