@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from random import randint
 import simple_draw as sd
 
 # На основе кода из практической части реализовать снегопад:
@@ -7,15 +7,14 @@ import simple_draw as sd
 # - нарисовать падение этих N снежинок
 # - создать список рандомных длинн лучей снежинок (от 10 до 100) и пусть все снежинки будут разные
 
-N = 20
-
 # Пригодятся функции
 # sd.get_point()
 # sd.snowflake()
 # sd.sleep()
 # sd.random_number()
 # sd.user_want_exit()
-from random import randint
+
+N = 20
 
 x = [randint(100, 500) for i in range(20)]
 y = [randint(450, 600) for i in range(20)]
@@ -26,13 +25,9 @@ while True:
     for i in range(20):
         point = sd.get_point(x[i], y[i])
         sd.snowflake(center=point, length=length_list[i])
-        y[i] += (randint(5, 15) * -1)
-        if y[i] < 0:
-            break
-        x[i] += randint(-15, 15)
-    sd.sleep(0.1)
-    if sd.user_want_exit():
-        break
+        if y[i] > length_list[i]:
+            y[i] += (randint(5, 15) * -1)
+            x[i] += randint(-15, 15)
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
