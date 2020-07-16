@@ -23,10 +23,10 @@ import os, time, shutil
 #
 # Пригодятся функции:
 #   os.walk
-#   os.path.dirname
-#   os.path.join
-#   os.path.normpath
-#   os.path.getmtime
+#   os.path.dirname        возвращает имя директории пути path
+#   os.path.join           соединяет пути
+#   os.path.normpath       нормализует путь, убирая избыточные разделители
+#   os.path.getmtime       время последнего изменения файла, в секундах
 #   time.gmtime
 #   os.makedirs
 #   shutil.copy2
@@ -34,7 +34,26 @@ import os, time, shutil
 # Чтение документации/гугла по функциям - приветствуется. Как и поиск альтернативных вариантов :)
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
 
-# TODO здесь ваш код
+dir_in = 'icons'
+dir_out = 'icons_by_year'
+
+
+# def _time_file(list_file):
+#     for file_name in list_file:
+#         path = os.path.join(dirpath, file_name)
+#         time_file = time.gmtime(os.path.getmtime(path))
+#         return time_file
+
+
+for dirpath, dirnames, filenames in os.walk(dir_in):
+    print(dirpath, dirnames, filenames)
+    for file_name in filenames:
+        path = os.path.join(dirpath, file_name)
+        time_file = time.gmtime(os.path.getmtime(path))
+        path = os.path.join(dir_out, str(time_file[0]), str(time_file[1]), str(time_file[2]))
+        os.makedirs(path)
+        shutil.copy2(os.path.join(dirpath, file_name), path)
+
 
 # Усложненное задание (делать по желанию)
 # Нужно обрабатывать zip-файл, содержащий фотографии, без предварительного извлечения файлов в папку.
