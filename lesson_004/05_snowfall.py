@@ -16,19 +16,23 @@ import simple_draw as sd
 
 N = 20
 
-x = [randint(100, 500) for i in range(20)]
-y = [randint(450, 600) for i in range(20)]
-length_list = [randint(5, 50) for i in range(20)]
+x = [randint(100, 500) for i in range(N)]
+y = [randint(450, 600) for i in range(N)]
+length_list = [randint(5, 50) for i in range(N)]
 
 while True:
-    sd.clear_screen()
-    for i in range(20):
+    sd.start_drawing()
+    for i in range(N):
         point = sd.get_point(x[i], y[i])
-        sd.snowflake(center=point, length=length_list[i])
+
+        sd.snowflake(center=point, length=length_list[i], color=sd.COLOR_WHITE)
+        sd.clear_screen()
         if y[i] > length_list[i]:
-            y[i] += (randint(5, 15) * -1)
+            y[i] -= randint(5, 15)
             x[i] += randint(-15, 15)
+        # sd.snowflake(center=point, length=length_list[i], color=sd.COLOR_WHITE)
     sd.sleep(0.1)
+    sd.finish_drawing()
     if sd.user_want_exit():
         break
 

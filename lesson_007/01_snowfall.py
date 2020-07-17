@@ -11,16 +11,16 @@ import simple_draw as sd
 class Snowflake:
 
     def __init__(self, x, y, length):
-        self.length = length
         self.x = x
         self.y = y
-        self.draw()
+        self.length = length
+        # self.draw()
 
     def clear(self):
         sd.clear_screen()
 
     def move(self):
-        self.x += random.randint(5, 15)
+        self.x += random.randint(-15, 15)
         self.y -= random.randint(5, 15)
 
     def draw(self):
@@ -46,12 +46,13 @@ class Snowflake:
 # шаг 2: создать снегопад - список объектов Снежинка в отдельном списке, обработку примерно так:
 def get_flakes(count):
     fl = []
-    for _ in range(20):
-        flake = Snowflake(x=random.randint(0, 200), y=random.randint(400, 600), length=random.randint(10, 50))
+    for _ in range(count):
+        flake = Snowflake(x=random.randint(100, 400), y=random.randint(400, 600), length=random.randint(10, 50))
         fl.append(flake)
         return fl
 
 flakes = get_flakes(count=20)  # создать список снежинок
+
 
 while True:
     for flake in flakes:
