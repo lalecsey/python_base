@@ -36,15 +36,14 @@ class PrimeNumbers:
     def __next__(self):
         self.i += 1
         for j in self.prime_numbers:
-             if self.i % j == 0:
-                if self.i < self.n + 1:
+            if self.i < self.n + 1:
+                if self.i % j == 0:
                     self.i += 1
-                else:
-                    raise StopIteration
+            else:
+                raise StopIteration
         else:
             self.prime_numbers.append(self.i)
             return self.i
-
 
 
 prime_number_iterator = PrimeNumbers(n=10000)
@@ -52,7 +51,6 @@ for number in prime_number_iterator:
     print(number)
 
 
-# TODO после подтверждения части 1 преподователем, можно делать
 # Часть 2
 # Теперь нужно создать генератор, который выдает последовательность простых чисел до n
 # Распечатать все простые числа до 10000 в столбик
@@ -63,9 +61,9 @@ def prime_numbers_generator(n):
     # TODO здесь ваш код
 
 
+#
 # for number in prime_numbers_generator(n=10000):
 #     print(number)
-
 
 # Часть 3
 # Написать несколько функций-фильтров, которые выдает True, если число:
