@@ -15,13 +15,28 @@
 # [2018-05-17 01:57] 1234
 
 
-class LogParser():
+class LogParser:
 
     def __init__(self, file_in):
+        self.i = 0
         self.file_in = file_in
         self.stat = {}
+        self._read_file()
 
-    def read_file(self):
+    def __iter__(self):
+        self.i = 0
+        return self
+
+    def __next__(self):
+        self.i += 1
+        if self.i <= len(self.stat):
+            for self.time in self.stat:
+                return [self.time, self.stat[self.time]]
+        else:
+            raise StopIteration
+
+
+    def _read_file(self):
         with open(self.file_in, 'r') as file:
             for line in file:
                 if line.endswith('NOK\n'):
@@ -32,18 +47,7 @@ class LogParser():
                         self.stat[line] = 1
 
 
-    def write_file(self):
-        file = open(self.file_out, 'w', encoding='utf8')
-        for time in self.stat.keys():
-            line = f' [{time}] {str(self.stat[time])}\n'
-            file.write(line)
-        file.close()
 
-    def stat_prtint(self):
-        print(self.stat)
-
-
-
-first_log = LogParser(file_in='events.txt', file_out='events_log.txt')
-first_log.read_file()
-first_log.write_file()
+grouped_events = LogParser(file_in='events.txt')
+for group_time, event_count in grouped_events:
+    print(f'[{group_time}] {event_count}')
